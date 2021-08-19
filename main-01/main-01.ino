@@ -3,8 +3,6 @@
 #include <Wire.h>
 #include "Compiler_Errors.h"
 
-//test
-
 // mapping and filter definitions
 #define LOW_DIFF 0
 #define HIGH_DIFF 50
