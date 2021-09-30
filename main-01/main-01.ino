@@ -3,6 +3,8 @@
 #include <Wire.h>
 #include "Compiler_Errors.h"
 
+//test
+
 // mapping and filter definitions
 #define LOW_DIFF 0
 #define HIGH_DIFF 50
@@ -65,7 +67,7 @@ void loop() {
   // print out the reading value for debug
   Serial.print(reading_a); 
   Serial.print("\t");
-  Serial.println(reading_b);   
+  Serial.println(reading_b);  
 
 
 
