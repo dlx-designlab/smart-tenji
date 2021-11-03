@@ -11,21 +11,11 @@
 
 #include <Adafruit_MotorShield.h> //adafruit motor sheild v2.3
 
-// Create the motor shield object with the default I2C address
-// Adafruit_MotorShield AFMS1 = Adafruit_MotorShield(0x60);
-// Adafruit_MotorShield AFMS2 = Adafruit_MotorShield(0x61);
+//creat an array of motor sheilds
+Adafruit_MotorShield MotorShields[2] = {Adafruit_MotorShield(0x60), Adafruit_MotorShield(0x61)}; 
 
-Adafruit_MotorShield MotorShields[2] = {Adafruit_MotorShield(0x60), Adafruit_MotorShield(0x61)}; //creat an array of motor sheilds
-
-// Or, create it with a different I2C address (say for stacking)
-// Adafruit_MotorShield AFMS = Adafruit_MotorShield(0x61);
-
-// Adafruit_DCMotor *myMotor1 = MotorShields[0].getMotor(1); //create motor at port 1
-// Adafruit_DCMotor *myMotor2 = MotorShields[0].getMotor(2); //create motor at port 2
-// Adafruit_DCMotor *myMotor3 = MotorShields[1].getMotor(1); //create motor at port 3
-// Adafruit_DCMotor *myMotor4 = MotorShields[1].getMotor(2); //create motor at port 4
-
-Adafruit_DCMotor *motors[2][2] = {        //creat an array of motors in the motor shield
+//creat an array of motors in the motor shield
+Adafruit_DCMotor *motors[2][2] = {        
   {MotorShields[0].getMotor(1), MotorShields[0].getMotor(2)},
   {MotorShields[1].getMotor(1), MotorShields[1].getMotor(2)}
 };
@@ -134,14 +124,13 @@ void setup() {
 
 void loop() {
 
-  readTouchInputs();
+  //readTouchInputs();
 
-  // motor_animations(animation_array_01[0]);
-  // delay(500);
-  // motor_animations(animation_array_01[1]);
-  // delay(500);
-  // motor_animations(animation_array_01[2]);
-  // delay(1000);
+  for(int i = 0; i < sizeof(animation_array_01); i++) 
+    {
+      motor_animations(animation_array_01[i]);
+      delay(500);
+    }
 
 }
 
@@ -188,8 +177,8 @@ void readTouchInputs(){
 
             // activate motor
 
-            motors[0][0]->run(FORWARD);      // turn motor on going forward
-            motors[1][0]->run(FORWARD); 
+            // motors[0][0]->run(FORWARD);      // turn motor on going forward
+            // motors[1][0]->run(FORWARD); 
             //delay(1000);
               
         }else{
@@ -204,8 +193,8 @@ void readTouchInputs(){
             tenji_matrix[posX][posY] = 0; //reset matrix
 
             //motor
-            motors[0][0]->run(RELEASE);      // motor stopped
-            motors[1][0]->run(RELEASE);
+            // motors[0][0]->run(RELEASE);      // motor stopped
+            // motors[1][0]->run(RELEASE);
          } 
         }
       }
@@ -213,23 +202,19 @@ void readTouchInputs(){
   }
 }
 
-// void motor_animations(int motors_array[floor_w][floor_h]) {
+void motor_animations(int motors_array[floor_w][floor_h]) {
 
-//   int motor_on;
-
-//   for (int j = 0; j < floor_h; j++) {
-//     // loop through columns of current row
-//     for (int k = 0; k < floor_w; k++){
-//      if (animation_array_01[j][k] == 1) {
-//        tenji_motors[j][k] == 1;
-//        motor_on = 1;
-//       }
-//     }
-//   }
-
-
-
-//}
+  for (int j = 0; j < floor_h; j++) {
+    // loop through columns of current row
+    for (int k = 0; k < floor_w; k++){
+     if (motors_array[j][k] == 1) {
+       motors[j][k]->run(FORWARD);
+      }else{
+        motors[j][k]->run(RELEASE);
+      }
+    }
+  }
+}
 
 
 
