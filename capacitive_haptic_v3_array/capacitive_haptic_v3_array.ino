@@ -99,10 +99,10 @@ void setup() {
 
   //set DC motor speed 0 (off) -> 255 (max speed)
   
-  motors[0][0]->setSpeed(150); 
-  motors[1][0]->setSpeed(150); 
-  motors[1][1]->setSpeed(150); 
-  motors[0][1]->setSpeed(150); 
+  motors[0][0]->setSpeed(250); 
+  motors[1][0]->setSpeed(250); 
+  motors[1][1]->setSpeed(250); 
+  motors[0][1]->setSpeed(250); 
 
   //while (!Serial) ; {} //uncomment when using the serial monitor 
   //Serial.println("Bare Conductive Proximity MP3 player");
